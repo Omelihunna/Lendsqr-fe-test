@@ -1,0 +1,97 @@
+@use "../../base/variables";
+
+.side-nav {
+  font-family: variables.$workSans;
+  background-color: #ffffff;
+  padding-top: 80px;
+  height: 100vh;
+  width: 370px;
+  position: relative;
+  z-index: 1020;
+  box-shadow: 3px 0 20px rgba(0, 0, 0, 0.04);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  @include variables.breakpointDesktop {
+    position: fixed;
+    width: 262px;
+    left: -270px;
+    z-index: 1030;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    &.nav-active {
+      left: 0;
+      transition: all 0.5s;
+      -webkit-transition: all 0.5s;
+    }
+  }
+
+  .side-nav-header {
+    height: 100px;
+    padding-left: 35px;
+    display: flex;
+    align-items: center;
+    @include variables.breakpointDesktop {
+      height: 70px;
+    }
+
+    img {
+      width: 110px;
+    }
+  }
+
+  .side-nav-menu {
+    padding: 30px 0;
+
+    a {
+      color: variables.$bluePrimary;
+      font-size: 16px;
+      font-weight: 400;
+      text-decoration: none;
+    }
+
+    .side-nav-menu-item {
+      padding: 10px 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-left: 4px solid transparent;
+      cursor: pointer;
+
+      &.active {
+        background-color: #39cdcd38;
+        padding: 10px 30px;
+        border-left: 4px solid variables.$greenPrimary;
+      }
+    }
+
+    .nav-item-header {
+      padding: 10px 30px;
+      color: variables.$textPrimary;
+      font-weight: 500;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+  }
+
+  .logout {
+    border-top: 1px solid #21407d5a;
+    padding: 10px 30px;
+    cursor: pointer;
+    color: variables.$bluePrimary;
+    font-size: 16px;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .version {
+      font-size: 12px;
+    }
+  }
+}

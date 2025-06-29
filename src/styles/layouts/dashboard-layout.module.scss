@@ -1,0 +1,31 @@
+@use "../base/variables";
+
+.dashboard-layout {
+  background-color: #fbfbfb;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  font-family: variables.$workSans;
+  .dashboard-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    @include variables.breakpointDesktop {
+      justify-content: flex-start;
+    }
+  }
+  .dashboard-main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .dashboard {
+    padding: 140px 40px 40px 40px;
+    width: 100%;
+    overflow-y: auto;
+    @include variables.breakpointDesktop {
+      padding: 100px 20px 40px 20px;
+    }
+  }
+}
