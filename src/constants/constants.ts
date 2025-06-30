@@ -195,3 +195,58 @@ export interface UserModel {
     socials: never,
     userName: string,
 }
+
+export interface User {
+    id: string;
+    bvn: string;
+    email: string;
+    gender: string;
+    status: string;
+    avatar: string;
+    socials: {
+        twitter: string;
+        facebook: string;
+        instagram: string;
+    };
+    children: number;
+    fullName: string;
+    username: string;
+    createdAt: string; // ISO date string
+    updatedAt: string; // ISO date string
+    dateJoined: string; // ISO date string
+    phoneNumber: string;
+    emailAddress: string;
+    organization: string;
+    maritalStatus: string;
+    typeOfResidence: string;
+    guarantor: {
+        address: string;
+        fullName: string;
+        phoneNumber: string;
+        relationship: string;
+    };
+    accountNumber: string;
+    accountBalance: string;
+    educationAndEmployment: {
+        officeEmail: string;
+        loanRepayment: string; // or number if parsed
+        monthlyIncome: string; // or number if parsed
+        employmentStatus: string;
+        levelOfEducation: string;
+        sectorOfEmployment: string;
+        durationOfEmployment: string;
+    };
+}
+
+
+    export
+    const
+    userNavItems: string[]
+    =
+    ['General Details',
+    'Documents',
+    'Bank Details',
+    'Loans',
+    'Savings',
+    'App and System'
+    ];

@@ -1,0 +1,105 @@
+@use "../../base/variables";
+
+.user-header {
+  overflow-x: auto;
+  background-color: #ffffff;
+  border: 1px solid rgba(33, 63, 125, 0.06);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  padding: 30px 30px 0 30px;
+
+  .user-header-info {
+    min-width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 50px;
+    @include variables.breakpointMobile {
+      margin-bottom: 20px;
+    }
+    .user-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 100%;
+      background-color: #21407d58;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      @include variables.breakpointMobile {
+        width: 60px;
+        height: 60px;
+        img {
+          width: 30px;
+        }
+      }
+    }
+    div:first-child {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .user-tier {
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 30px;
+      border-left: 1px solid #545f7d6d;
+      border-right: 1px solid #545f7d6d;
+      @include variables.breakpointMobile {
+        height: 70px;
+      }
+      p {
+        margin-bottom: 8px;
+      }
+      .star-rating {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+
+    div:last-child {
+      color: variables.$bluePrimary;
+      p:first-child {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        @include variables.breakpointMobile {
+          font-size: 16px;
+        }
+      }
+      p:last-child {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .user-header-nav {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    a {
+      min-width: fit-content;
+      color: #000000;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 10px;
+      @include variables.breakpointMobile {
+        font-size: 14px;
+      }
+
+      &:first-child {
+        border-bottom: 3px solid variables.$greenPrimary;
+        color: variables.$greenPrimary;
+      }
+    }
+  }
+}

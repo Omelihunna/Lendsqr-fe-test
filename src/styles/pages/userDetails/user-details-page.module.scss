@@ -1,0 +1,64 @@
+@use "../../base/variables";
+
+.user-details {
+  width: 100%;
+  color: variables.$textPrimary;
+  font-family: variables.$workSans;
+
+  .back {
+    font-size: 16px;
+    color: variables.$textPrimary;
+    text-decoration: none;
+    cursor: pointer;
+
+    img {
+      margin-right: 10px;
+    }
+  }
+
+  .header-btns {
+    width: 100%;
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include variables.breakpointMobile {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    h1 {
+      color: variables.$bluePrimary;
+      font-size: 24px;
+      font-weight: 500;
+      @include variables.breakpointMobile {
+        font-size: 20px;
+      }
+    }
+
+    button:first-child {
+      @include variables.buttonStyle;
+      background-color: transparent;
+      color: #e4033b;
+      border: 1px solid #e4033b;
+      margin-right: 20px;
+      padding: 12px 16px;
+      @include variables.breakpointMobile {
+        font-size: 12px;
+      }
+    }
+
+    button:last-child {
+      @include variables.buttonStyle;
+      background-color: transparent;
+      color: variables.$greenPrimary;
+      border: 1px solid variables.$greenPrimary;
+      padding: 12px 16px;
+      @include variables.breakpointMobile {
+        font-size: 12px;
+      }
+    }
+  }
+}
