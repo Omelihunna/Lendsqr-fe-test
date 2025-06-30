@@ -34,6 +34,8 @@ const UserDetailsPage: React.FC = () => {
         skip: !id, // Skip query if no ID is provided
     });
 
+    console.log(user)
+
     // Handle error state
     if (isError) {
         return (

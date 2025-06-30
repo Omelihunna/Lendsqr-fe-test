@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {config} from "../../config/config.ts";
 import type {User} from "../../constants/constants.ts";
+import {cacheUser, getCachedUser} from "../../utils/helpers.ts";
 
 export const userApi = createApi({
     reducerPath: "userApi",
@@ -14,14 +15,28 @@ export const userApi = createApi({
     tagTypes: ['User'], // Add cache tags for better cache management
     endpoints: (builder) => ({
         getUsers: builder.query<User[], void>({
-            query: () => "", // Assuming your endpoint is /users
-            providesTags: ['User'], // Tag for cache invalidation
+            query: () => "",
+            providesTags: ['User'],
         }),
         getUserById: builder.query<User, string>({
             query: () => ``,
-            transformResponse: (baseQueryReturnValue: any[], meta, arg: string) => {
-                return baseQueryReturnValue.find(user => user.id === arg);
+            transformResponse: (response: User[], meta, id) => {
+                const user = response.find(u => u.id === id);
+                if (!user) throw new Error("User not found");
+                cacheUser(id, user);
+                return user;
             },
+            async onCacheEntryAdded(id, { updateCachedData, cacheDataLoaded }) {
+                const cached = getCachedUser(id);
+                if (cached) {
+                    updateCachedData(() => cached);
+                }
+                try {
+                    await cacheDataLoaded;
+                } catch (error) {
+                    console.warn("Error loading user from server", error);
+                }
+            }
         }),
     }),
 });

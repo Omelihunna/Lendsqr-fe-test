@@ -238,6 +238,7 @@ export interface User {
     };
 }
 
+export const CACHE_TTL_MS = 1000 * 60 * 10;
 
     export
     const
