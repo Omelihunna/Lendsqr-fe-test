@@ -3,7 +3,7 @@
 .top-nav {
     background-color: #ffffff;
     height: 100px;
-    padding: 0 30px;
+    //padding: 0 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,6 +60,7 @@
 
     .logo {
         width: 120px;
+        padding-left: 30px;
     }
 
     .menu-icon {

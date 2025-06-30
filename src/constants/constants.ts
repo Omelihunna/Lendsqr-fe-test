@@ -179,3 +179,19 @@ export const usersStats = [
         count: '102,453',
     },
 ];
+
+export interface UserModel {
+    accountBalance: string,
+    accountNumber: string,
+    createdAt: string,
+    education: never,
+    email: string,
+    guarantor: never,
+    id: string,
+    lastActiveDate: string,
+    orgName: string,
+    phoneNumber: string,
+    profile: string,
+    socials: never,
+    userName: string,
+}

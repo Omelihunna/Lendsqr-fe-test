@@ -1,0 +1,47 @@
+@use "../../base/variables";
+
+.users-stats-box {
+  background-color: #ffffff;
+  border: 1px solid rgba(33, 63, 125, 0.06);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  width: 100%;
+  padding: 20px 30px 30px;
+  @include variables.breakpointTabletLg {
+    width: 100%;
+    padding: 20px;
+  }
+
+  img {
+    margin-bottom: 12px;
+    @include variables.breakpointTabletLg {
+      width: 30px;
+      margin-bottom: 8px;
+    }
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 500;
+    color: variables.$textPrimary;
+    text-transform: uppercase;
+    @include variables.breakpointMobile {
+      font-size: 12px;
+    }
+  }
+
+  p:last-child {
+    font-size: 24px;
+    font-weight: 600;
+    color: variables.$bluePrimary;
+    margin-top: 12px;
+    @include variables.breakpointTabletLg {
+      font-size: 20px;
+      margin-top: 8px;
+    }
+    @include variables.breakpointMobile {
+      font-size: 16px;
+      margin-top: 8px;
+    }
+  }
+}
