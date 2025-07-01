@@ -7,6 +7,7 @@ import { selectUser, clearSelectedUser } from "../store/user/userSlice";
 import UserDetailsHeader from "../components/userDetails/UserDetailsHeader.tsx";
 import UserDetailsBody from "../components/userDetails/UserDetailsBody.tsx";
 import styles from "../styles/pages/userDetails/user-details-page.module.scss";
+import Loader from "../components/global/Loader.tsx";
 // import type {RootState} from "../store";
 
 const UserDetailsPage: React.FC = () => {
@@ -40,7 +41,7 @@ const UserDetailsPage: React.FC = () => {
     if (isError) {
         return (
             <section className={styles["user-details"]}>
-                <Link to="/dashboard/users" className="back">
+                <Link to="/dashboard/users" className={styles.back}>
                     <img src="/images/icons/back-icon.svg" alt="back" />
                     <span>Back to Users</span>
                 </Link>
@@ -110,15 +111,7 @@ const UserDetailsPage: React.FC = () => {
             </div>
 
             {loading ? (
-                <div className="loading-container">
-                    <ClipLoader
-                        color="#3B82F6"
-                        loading={loading}
-                        size={50}
-                        aria-label="Loading User Details"
-                    />
-                    <p>Loading user details...</p>
-                </div>
+               <Loader />
             ) : user ? (
                 <div>
                     <UserDetailsHeader user={user} />

@@ -22,8 +22,8 @@
       margin-bottom: 30px;
     }
     .user-info-main {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 30px;
       div {
         margin-right: 2%;

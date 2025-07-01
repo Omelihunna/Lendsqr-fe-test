@@ -42,7 +42,7 @@
   }
 
   .side-nav-menu {
-    padding: 100px 0;
+    padding: 120px 0;
 
     a {
       color: variables.$bluePrimary;
@@ -53,6 +53,7 @@
 
     .side-nav-menu-item {
       padding: 10px 30px;
+      opacity: 50%;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -62,8 +63,12 @@
 
       &.active {
         background-color: #39cdcd38;
+        opacity: 100%;
         padding: 10px 30px;
         border-left: 4px solid variables.$greenPrimary;
+        span {
+          color: variables.$bluePrimary;
+        }
       }
     }
 

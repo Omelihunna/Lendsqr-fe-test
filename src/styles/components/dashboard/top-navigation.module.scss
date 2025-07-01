@@ -3,7 +3,7 @@
 .top-nav {
     background-color: #ffffff;
     height: 100px;
-    //padding: 0 30px;
+    padding: 0 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,9 +58,15 @@
     gap: 2rem;
     color: variables.$bluePrimary;
 
+    .left {
+        display: flex;
+        flex-direction: row;
+        gap: 170px;
+    }
+
     .logo {
-        width: 120px;
-        padding-left: 30px;
+        width: 145px;
+        //padding-left: 30px;
     }
 
     .menu-icon {

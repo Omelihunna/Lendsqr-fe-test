@@ -1,7 +1,7 @@
 export const navItems = [
     {
         title: 'Switch Organization',
-        icon: '/images/icons/nav-icon-4.svg',
+        icon: '/images/icons/nav-icon-13.svg',
         link: '#',
         id: 1,
     },
@@ -179,6 +179,15 @@ export const usersStats = [
         count: '102,453',
     },
 ];
+
+const status = [
+    "Active",
+    "Pending",
+    "Blacklisted",
+    "Inactive",
+]
+
+export const getRandomStatus = () => status[Math.floor(Math.random() * status.length)];
 
 export interface UserModel {
     accountBalance: string,

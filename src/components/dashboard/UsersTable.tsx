@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import type { UserModel } from "../../constants/constants"
+import {getRandomStatus, type UserModel} from "../../constants/constants"
 import FilterModal from "./modals/FilterModal.tsx";
 import OptionsModal from "./modals/OptionsModal.tsx";
 import styles from "../../styles/components/dashboard/users-table.module.scss"
@@ -45,6 +45,7 @@ const UsersTable: React.FC<Props> = ({ users }) => {
 
                 <tbody>
                 {users.map((user: any, index: number) => {
+                    const status = getRandomStatus();
                     return (
                         <tr key={index}>
                             <td>
@@ -55,7 +56,7 @@ const UsersTable: React.FC<Props> = ({ users }) => {
                             <td>{user?.phoneNumber}</td>
                             <td>{moment(user?.createdAt).format('MMM D, YYYY h:mm a')}</td>
                             <td>
-                                <span className="status active"> Active</span>
+                                <span className={styles[`status-${status.toLowerCase()}`]}>{status}</span>
                             </td>
                             <td>
                                 <img

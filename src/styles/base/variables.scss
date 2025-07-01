@@ -14,6 +14,13 @@ $bluePrimary: #213f7d;
 $textPrimary: #545f7d;
 $greenPrimary: #39cdcc;
 
+$status-colors: (
+        active: (#39cd62, rgba(57, 205, 98, 0.2)),
+        inactive: (#545F7D, rgba(84, 95, 125, 0.2)),
+        pending: (#E9B200, rgba(233, 178, 0, 0.2)),
+        blacklisted: (#E4033B, rgba(228, 3, 59, 0.2)),
+);
+
 // Fonts
 $workSans: 'Work Sans', sans-serif;
 $avenirNext: 'Avenir next', sans-serif;

@@ -50,12 +50,14 @@
 
     tbody {
       tr {
-        .status.active {
-          padding: 6px 10px;
-          color: #39cd62;
-          background-color: #39cd633b;
-          border-radius: 100px;
-          font-size: 14px;
+        @each $status, $colors in variables.$status-colors {
+          .status-#{$status} {
+            padding: 6px 10px;
+            color: nth($colors, 1);
+            background-color: nth($colors, 2);
+            border-radius: 100px;
+            font-size: 14px;
+          }
         }
 
         td {

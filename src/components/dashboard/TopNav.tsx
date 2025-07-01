@@ -12,6 +12,7 @@ const TopNav: React.FC<Props> = ({ setIsMenuOpen, isMenuOpen }) => {
         <div className={styles['top-nav']}>
             <div>
                 <div className={styles['top-nav-main']}>
+                    <div className={styles["left"]}>
                     <img src="/images/logo.svg" alt="logo" className={styles.logo} />
                     <div className={styles['search-input']}>
                         <input type="search" placeholder="Search for anything" />
@@ -19,6 +20,7 @@ const TopNav: React.FC<Props> = ({ setIsMenuOpen, isMenuOpen }) => {
                             <img src="/images/icons/search-icon.svg" alt="search" />
                         </button>
                     </div>
+                </div>
                     <div className={styles['top-nav-right']}>
                         <Link to="#">Docs</Link>
                         <img src="/images/icons/bell-icon.svg" alt="notify" />
