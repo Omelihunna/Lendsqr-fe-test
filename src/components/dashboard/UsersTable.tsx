@@ -2,13 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import {getRandomStatus, type UserModel} from "../../constants/constants"
+import {getRandomStatus, type User, type UserModel} from "../../constants/constants"
 import FilterModal from "./modals/FilterModal.tsx";
 import OptionsModal from "./modals/OptionsModal.tsx";
 import styles from "../../styles/components/dashboard/users-table.module.scss"
 
 interface Props {
-    users: UserModel[];
+    users: User[];
     loading: boolean;
 }
 

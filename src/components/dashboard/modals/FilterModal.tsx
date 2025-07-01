@@ -37,7 +37,7 @@ const FilterModal: React.FC = () => {
             onSubmit={onSubmit}
         >
             {({ resetForm }) => (
-                <Form className={styles["filter-form"]}>
+                <Form className={styles["filter-form"]} data-testid="filter-form">
                     <div className={styles["form-group"]}>
                         <label htmlFor="organization">Organization</label>
                         <Field
