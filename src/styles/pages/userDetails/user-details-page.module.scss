@@ -7,16 +7,12 @@
 
   .back {
     font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
     color: variables.$textPrimary;
     text-decoration: none;
     cursor: pointer;
-
-    a {
-      img {
-        //margin-right: 150px;
-        padding-right: 10px;
-      }
-    }
   }
 
   .header-btns {
@@ -42,19 +38,25 @@
     }
 
     button:first-child {
-      @include variables.buttonStyle;
       background-color: transparent;
       color: #e4033b;
       border: 1px solid #e4033b;
       margin-right: 20px;
       padding: 12px 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      font-size: 14px;
+      //@include variables.buttonStyle;
       @include variables.breakpointMobile {
         font-size: 12px;
       }
     }
 
     button:last-child {
-      @include variables.buttonStyle;
+      font-weight: 600;
+      border-radius: 8px;
+      font-size: 14px;
+      letter-spacing: 1px;
       background-color: transparent;
       color: variables.$greenPrimary;
       border: 1px solid variables.$greenPrimary;

@@ -20,7 +20,6 @@ const UserDetailsHeader: React.FC<Props> = ({user}) => {
                         <p>{user?.bvn}</p>
                     </div>
                 </div>
-
                 <div className={styles["user-tier"]}>
                     <p>User’s Tier</p>
                     <div className="star-rating">

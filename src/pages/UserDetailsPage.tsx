@@ -79,9 +79,11 @@ const UserDetailsPage: React.FC = () => {
 
     return (
         <section className={styles["user-details"]}>
-            <Link to="/dashboard/users" className="back">
+            <Link to="/dashboard/users" className={styles["back"]}>
                 <img src="/images/icons/back-icon.svg" alt="back" />
+                <div>
                 <span>Back to Users</span>
+                </div>
             </Link>
 
             <div className={styles["header-btns"]}>

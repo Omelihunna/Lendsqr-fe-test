@@ -15,11 +15,24 @@ $textPrimary: #545f7d;
 $greenPrimary: #39cdcc;
 
 $status-colors: (
-        active: (#39cd62, rgba(57, 205, 98, 0.2)),
-        inactive: (#545F7D, rgba(84, 95, 125, 0.2)),
-        pending: (#E9B200, rgba(233, 178, 0, 0.2)),
-        blacklisted: (#E4033B, rgba(228, 3, 59, 0.2)),
+        active: (
+                text: #39cd62,
+                background: rgba(57, 205, 98, 0.2)
+        ),
+        inactive: (
+                text: #545F7D,
+                background: rgba(84, 95, 125, 0.2)
+        ),
+        pending: (
+                text: #E9B200,
+                background: rgba(233, 178, 0, 0.2)
+        ),
+        blacklisted: (
+                text: #E4033B,
+                background: rgba(228, 3, 59, 0.2)
+        )
 );
+
 
 // Fonts
 $workSans: 'Work Sans', sans-serif;

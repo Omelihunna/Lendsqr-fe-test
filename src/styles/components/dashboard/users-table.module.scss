@@ -1,4 +1,5 @@
 @use "../../base/variables";
+@use "sass:map";
 
 .users-table {
   padding: 0 30px;
@@ -53,8 +54,8 @@
         @each $status, $colors in variables.$status-colors {
           .status-#{$status} {
             padding: 6px 10px;
-            color: nth($colors, 1);
-            background-color: nth($colors, 2);
+            color: map.get($colors, text);
+            background-color: map.get($colors, background);
             border-radius: 100px;
             font-size: 14px;
           }

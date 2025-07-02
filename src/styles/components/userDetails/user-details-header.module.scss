@@ -75,8 +75,9 @@
     div:last-child {
       color: variables.$bluePrimary;
       p:first-child {
+        font-family: variables.$workSans;
         font-size: 22px;
-        font-weight: 700;
+        font-weight: 500;
         margin-bottom: 8px;
         @include variables.breakpointMobile {
           flex-direction:  column;
@@ -87,6 +88,8 @@
       }
       p:last-child {
         font-size: 14px;
+        color: #545f7d;
+        font-weight: 400;
       }
     }
   }
