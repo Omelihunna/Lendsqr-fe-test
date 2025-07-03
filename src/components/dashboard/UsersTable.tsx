@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useState } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import {getRandomStatus, type UserModel} from "../../constants/constants"
+import {getRandomStatus, type User} from "../../constants/constants"
 import FilterModal from "./modals/FilterModal.tsx";
 import OptionsModal from "./modals/OptionsModal.tsx";
 import styles from "../../styles/components/dashboard/users-table.module.scss"
 
 interface Props {
-    users: UserModel[];
+    users: User[];
     loading: boolean;
 }
 
@@ -16,7 +16,8 @@ const tableHeaders = ['Organization', 'Username', 'Email', 'Phone number', 'Date
 
 const UsersTable: React.FC<Props> = ({ users }) => {
     const [isFilterOpen, setIsFilterOpen] = useState<null | number>(null);
-    const [isOptionsOpen, setIsOptionsOpen] = useState<null | number>(null);
+    const [isOptionsOpen, setIsOptionsOpen] = useState<null | string>(null);
+    const validUsers = useMemo(() => users.map(user => ({...user, status: getRandomStatus(), createdAt: moment(user?.createdAt).format('MMM D, YYYY h:mm a')})), [users]);
 
     return (
         <div data-testid="user-table" className={styles["users-table"]}>
