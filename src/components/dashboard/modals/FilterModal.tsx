@@ -11,7 +11,11 @@ interface FilterModalValues {
     status: string;
 }
 
-const FilterModal: React.FC = () => {
+interface FilterModalProps {
+    index?: number;
+}
+
+const FilterModal: React.FC<FilterModalProps> = ({ index = 0 }) => {
     const initialValues: FilterModalValues = {
         organization: '',
         username: '',
@@ -31,13 +35,17 @@ const FilterModal: React.FC = () => {
         resetForm();
     };
 
+    const formClassName = index === 0 
+        ? `${styles["filter-form"]} ${styles["left-align"]}`
+        : styles["filter-form"];
+
     return (
         <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
         >
             {({ resetForm }) => (
-                <Form className={styles["filter-form"]}>
+                <Form className={formClassName}>
                     <div className={styles["form-group"]}>
                         <label htmlFor="organization">Organization</label>
                         <Field

@@ -1,12 +1,19 @@
 import React from 'react';
 import styles from "../../../styles/components/dashboard/options-modal.module.scss"
+import { Link } from 'react-router-dom';
 
-const OptionsModal: React.FC = () => {
+interface OptionsModalProps {
+    id: string;
+}
+
+const OptionsModal: React.FC<OptionsModalProps> = ({id}) => {
     return (
         <div className={styles["options-dropdown"]}>
             <ul>
                 <li>
-                    <img src="/images/icons/eye-icon.svg" alt="eye icon" /> <span>View Details</span>
+                    <Link to={`/dashboard/users/${id}`}>
+                        <img src="/images/icons/eye-icon.svg" alt="eye icon" /> <span>View Details</span>
+                    </Link>
                 </li>
                 <li>
                     <img src="/images/icons/user-x-icon.svg" alt="eye icon" /> <span>Blacklist User</span>

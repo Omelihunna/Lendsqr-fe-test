@@ -9,7 +9,12 @@
   padding: 30px 20px;
   position: absolute;
   top: 60px;
-  z-index: 20;
+  right: 0;
+  &.left-align {
+    left: 0;
+    // right: auto;
+  }
+  z-index: 1000;
   color: variables.$textPrimary;
   .form-group {
     display: flex;

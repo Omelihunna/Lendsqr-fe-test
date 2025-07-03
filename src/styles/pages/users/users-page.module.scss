@@ -17,6 +17,7 @@
     justify-content: space-between;
     width: 100%;
     margin-bottom: 30px;
+
     @include variables.breakpointMobile {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -31,21 +32,39 @@
   margin-top: 23px;
   color: variables.$textPrimary;
   font-size: 14px;
+
   @include variables.breakpointMobile {
     flex-direction: column;
     gap: 20px;
     align-items: center;
   }
+
   .user-page-info {
     span {
       padding: 7px 10px;
       color: variables.$bluePrimary;
       font-weight: 500;
-      background-color: rgba(33, 63, 125, 0.1);
+      // background-color: rgba(33, 63, 125, 0.1);
       border-radius: 4px;
+
       img {
         margin-left: 10px;
       }
+    }
+  }
+
+  .items-per-page-select {
+    padding: 4px 8px;
+    // border: 1px solid rgba(84, 95, 125, 0.2);
+    border-radius: 4px;
+    background: rgba(33, 63, 125, 0.1);
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0 4px;
+
+    &:focus {
+      outline: none;
+      border-color: #39cd62;
     }
   }
 
@@ -55,13 +74,16 @@
     align-items: center;
     gap: 20px;
     list-style: none;
+
     .active {
       color: variables.$bluePrimary;
       font-weight: 500;
     }
+
     .page-link {
       cursor: pointer;
     }
+
     .arrow {
       cursor: pointer;
       height: 24px;

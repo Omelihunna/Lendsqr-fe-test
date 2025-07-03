@@ -36,7 +36,7 @@ const UsersTable: React.FC<Props> = ({ users }) => {
                                         />
                                     )}
                                 </div>
-                                {isFilterOpen === index ? <FilterModal /> : ''}
+                                {isFilterOpen === index ? <FilterModal index={index} /> : ''}
                             </th>
                         );
                     })}
@@ -44,28 +44,27 @@ const UsersTable: React.FC<Props> = ({ users }) => {
                 </thead>
 
                 <tbody>
-                {users.map((user: any, index: number) => {
-                    const status = getRandomStatus();
+                {validUsers.map((user: User) => {
                     return (
-                        <tr key={index}>
+                        <tr key={user.id}>
                             <td>
                                 <Link to={`/dashboard/users/${user?.id}`}>{user?.organization}</Link>
                             </td>
                             <td>{user?.username}</td>
                             <td>{user?.email}</td>
                             <td>{user?.phoneNumber}</td>
-                            <td>{moment(user?.createdAt).format('MMM D, YYYY h:mm a')}</td>
+                            <td>{user?.createdAt}</td>
                             <td>
-                                <span className={styles[`status-${status.toLowerCase()}`]}>{status}</span>
+                                <span className={styles[`status-${user.status.toLowerCase()}`]}>{user.status}</span>
                             </td>
                             <td>
                                 <img
                                     src="/images/icons/more-icon.svg"
                                     alt="more"
-                                    onClick={() => (isOptionsOpen === index ? setIsOptionsOpen(null) : setIsOptionsOpen(index))}
+                                    onClick={() => (isOptionsOpen === user?.id ? setIsOptionsOpen(null) : setIsOptionsOpen(user.id))}
                                 />
 
-                                {isOptionsOpen === index ? <OptionsModal /> : ''}
+                                {isOptionsOpen === user?.id ? <OptionsModal id={user?.id} /> : ''}
                             </td>
                         </tr>
                     );
