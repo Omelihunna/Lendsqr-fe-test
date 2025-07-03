@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ClipLoader } from "react-spinners";
 import { useGetUserByIdQuery } from "../store/user/userApi";
 import { selectUser, clearSelectedUser } from "../store/user/userSlice";
 import UserDetailsHeader from "../components/userDetails/UserDetailsHeader.tsx";
@@ -32,7 +31,7 @@ const UserDetailsPage: React.FC = () => {
         error,
         isError
     } = useGetUserByIdQuery(id!, {
-        skip: !id, // Skip query if no ID is provided
+        skip: !id,
     });
 
     console.log(user)

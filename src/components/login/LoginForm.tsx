@@ -1,7 +1,9 @@
-import React, {useState} from "react";
-import {Formik, Form, Field, ErrorMessage} from "formik";
-import {LoginValidationSchema} from "../../schemas/LoginValidationSchema.tsx";
+import React, { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { LoginValidationSchema } from "../../schemas/LoginValidationSchema.tsx";
 import styles from "../../styles/components/login/login-form.module.scss";
+import { useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 interface LoginValues {
     email: string;
@@ -10,14 +12,20 @@ interface LoginValues {
 
 const LoginForm: React.FC = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const nav = useNavigate();
 
     const initialValues: LoginValues = {
         email: "",
         password: "",
     };
 
-    const handleSubmit = (values: LoginValues) => {
-        console.log("Logging in with:", values);
+    const handleSubmit = async (values: LoginValues) => {
+        setLoading(true);
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        console.log("Login successful", values);
+        nav("/dashboard/users");
+        setLoading(false);
     };
 
     const togglePasswordVisibility = () => {
@@ -26,7 +34,7 @@ const LoginForm: React.FC = () => {
 
     return (
         <div className={styles["login-form"]}>
-            <img src="/images/logo.svg" alt="logo" className={styles["logo"]}/>
+            <img src="/images/logo.svg" alt="logo" className={styles["logo"]} />
             <section>
                 <header className={styles["login-header"]}>
                     <h1>Welcome!</h1>
@@ -37,7 +45,7 @@ const LoginForm: React.FC = () => {
                     validationSchema={LoginValidationSchema}
                     onSubmit={handleSubmit}
                 >
-                    {({handleChange, handleSubmit, handleBlur, values}) => (
+                    {({ handleChange, handleSubmit, handleBlur, values }) => (
                         <Form onSubmit={handleSubmit} className={styles["form"]}>
                             <div>
                                 <Field
@@ -89,7 +97,7 @@ const LoginForm: React.FC = () => {
                                 className={styles["input-error"]}
                             />
                             <p className={styles["form"] + "__forgot"}>FORGOT PASSWORD?</p>
-                            <button type="submit" className={styles["submit"]}>Login</button>
+                            <button type="submit" className={styles["submit"]}>{loading ? <ClipLoader color="white" size={20}/> : "Login"}</button>
                         </Form>
                     )}
                 </Formik>
