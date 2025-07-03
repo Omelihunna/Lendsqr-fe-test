@@ -1,4 +1,4 @@
-import LoginForm from "../components/LoginForm.tsx";
+import LoginForm from "../components/login/LoginForm.tsx";
 import React from "react";
 import styles from "../styles/pages/login/login-page.module.scss"
 

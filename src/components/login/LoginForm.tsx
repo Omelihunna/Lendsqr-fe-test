@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
-import {LoginValidationSchema} from "../schemas/LoginValidationSchema.tsx";
-import styles from "../styles/components/login/login-form.module.scss";
+import {LoginValidationSchema} from "../../schemas/LoginValidationSchema.tsx";
+import styles from "../../styles/components/login/login-form.module.scss";
 
 interface LoginValues {
     email: string;
