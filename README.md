@@ -156,8 +156,8 @@ This project is licensed under the MIT License. See [LICENSE](./LICENSE) for det
 ## App Path & Links
 - **Local:** Run `npm run dev` and visit [http://localhost:5173](http://localhost:5173)
 - **GitHub Repo:** [https://github.com/Omelihunna/Lendsqr-fe-test](https://github.com/Omelihunna/Lendsqr-fe-test)
-- **(Optional) Deployed URL:** _Add your deployed URL here if available_
-- **(Optional) Documentation:** _Add your Google Doc/Notion link here if available_
+- **Deployed URL:**[https://iheanacho-omelihunna-ebubechi-lends.vercel.app/]
+- **(Optional) Report:** [https://docs.google.com/document/d/13DH26_YFe6KLHNvtWpsK0en5CmEXCzE5Lc0TZZaK_Kg/edit?usp=sharing]
 
 ---
 
