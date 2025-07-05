@@ -64,6 +64,7 @@ const LoginForm: React.FC = () => {
                                 name="email"
                                 component="div"
                                 className={styles["input-error"]}
+                                data-testid="email-error"
                             />
                             <div className={styles["input-password"]}>
                                 <Field
@@ -96,9 +97,10 @@ const LoginForm: React.FC = () => {
                                 name="password"
                                 component="div"
                                 className={styles["input-error"]}
+                                data-testid="password-error"
                             />
                             <p className={styles["form"] + "__forgot"}>FORGOT PASSWORD?</p>
-                            <button type="submit" className={styles["submit"]}>{loading ? <ClipLoader color="white" size={20}/> : "Login"}</button>
+                            <button data-testid="login-button" type="submit" className={styles["submit"]}>{loading ? <ClipLoader color="white" size={20}/> : "Login"}</button>
                         </Form>
                     )}
                 </Formik>
