@@ -1,38 +1,42 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Formik, Form, Field } from 'formik';
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState } from '../../../store';
+import { closeFilterModal, updateFilterValues, resetFilters, type FilterValues } from '../../../store/user/userSlice';
 import styles from "../../../styles/components/dashboard/filter-modal.module.scss"
-
-interface FilterModalValues {
-    organization: string;
-    username: string;
-    email: string;
-    date: string;
-    phone: string;
-    status: string;
-}
 
 interface FilterModalProps {
     index?: number;
 }
 
 const FilterModal: React.FC<FilterModalProps> = ({ index = 0 }) => {
-    const initialValues: FilterModalValues = {
-        organization: '',
-        username: '',
-        email: '',
-        date: '',
-        phone: '',
-        status: '',
-    };
+    const dispatch = useDispatch();
+    const { isFilterOpen, filterValues } = useSelector((state: RootState) => state.users);
+    const modalRef = useRef<HTMLDivElement>(null);
+    const firstInputRef = useRef<HTMLInputElement>(null);
 
-    const onSubmit = (values: FilterModalValues) => {
-        if (values) {
-            // console.log(values);
+    useEffect(() => {
+        if (isFilterOpen && firstInputRef.current) {
+            firstInputRef.current.focus();
+        }
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') dispatch(closeFilterModal());
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [isFilterOpen, dispatch]);
+
+    if (!isFilterOpen) return null;
+
+    const handleBackdropClick = (e: React.MouseEvent) => {
+        if (modalRef.current && e.target === modalRef.current) {
+            dispatch(closeFilterModal());
         }
     };
 
-    const handleReset = (resetForm: () => void) => {
-        resetForm();
+    const handleSubmit = (values: FilterValues) => {
+        dispatch(updateFilterValues(values));
+        dispatch(closeFilterModal());
     };
 
     const formClassName = index === 0
@@ -41,17 +45,21 @@ const FilterModal: React.FC<FilterModalProps> = ({ index = 0 }) => {
 
     return (
         <Formik
-            initialValues={initialValues}
-            onSubmit={onSubmit}
+            initialValues={filterValues}
+            enableReinitialize
+            onSubmit={handleSubmit}
         >
-            {({ resetForm }) => (
-                <Form className={formClassName}  data-testid="filter-form">
+            {({ handleChange, handleSubmit, handleReset, values }) => (
+                <Form className={formClassName} data-testid="filter-form">
                     <div className={styles["form-group"]}>
                         <label htmlFor="organization">Organization</label>
                         <Field
                             as="select"
                             name="organization"
                             id="organization"
+                            onChange={handleChange}
+                            value={values.organization}
+                            innerRef={firstInputRef}
                         >
                             <option value="">Select</option>
                         </Field>
@@ -63,6 +71,8 @@ const FilterModal: React.FC<FilterModalProps> = ({ index = 0 }) => {
                             name="username"
                             id="username"
                             placeholder="User"
+                            onChange={handleChange}
+                            value={values.username}
                         />
                     </div>
                     <div className={styles["form-group"]}>
@@ -72,6 +82,8 @@ const FilterModal: React.FC<FilterModalProps> = ({ index = 0 }) => {
                             name="email"
                             id="email"
                             placeholder="Email"
+                            onChange={handleChange}
+                            value={values.email}
                         />
                     </div>
                     <div className={styles["form-group"]}>
@@ -81,6 +93,8 @@ const FilterModal: React.FC<FilterModalProps> = ({ index = 0 }) => {
                             name="date"
                             id="date"
                             placeholder="Date"
+                            onChange={handleChange}
+                            value={values.date}
                         />
                     </div>
                     <div className={styles["form-group"]}>
@@ -90,6 +104,8 @@ const FilterModal: React.FC<FilterModalProps> = ({ index = 0 }) => {
                             name="phone"
                             id="phone"
                             placeholder="Phone Number"
+                            onChange={handleChange}
+                            value={values.phone}
                         />
                     </div>
                     <div className={styles["form-group"]}>
@@ -98,12 +114,18 @@ const FilterModal: React.FC<FilterModalProps> = ({ index = 0 }) => {
                             as="select"
                             name="status"
                             id="status"
+                            onChange={handleChange}
+                            value={values.status}
                         >
                             <option value="">Select</option>
+                            <option value="Active">Active</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Blacklisted">Blacklisted</option>
+                            <option value="Inactive">Inactive</option>
                         </Field>
                     </div>
-                    <div>
-                        <button type="button" onClick={() => handleReset(resetForm)}>Reset</button>
+                    <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
+                        <button type="button" onClick={() => { handleReset(); handleReset(); }}>Reset</button>
                         <button type="submit">Filter</button>
                     </div>
                 </Form>

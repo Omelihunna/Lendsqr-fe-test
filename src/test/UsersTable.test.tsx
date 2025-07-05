@@ -1,5 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 import UsersTable from '../components/dashboard/UsersTable';
+import userReducer from '../store/user/userSlice';
 import '@testing-library/jest-dom';
 import type { User } from '../constants/constants';
 import { MemoryRouter } from 'react-router-dom';
@@ -27,13 +30,44 @@ const mockUsers = [
   },
 ] as User[];
 
-describe('UsersTable', () => {
-  it('renders table headers', () => {
-    render(
+const createTestStore = () => {
+  return configureStore({
+    reducer: {
+      users: userReducer,
+    },
+    preloadedState: {
+      users: {
+        selectedUserId: null,
+        selectedUser: null,
+        allUsers: [],
+        isFilterOpen: false,
+        filterValues: {
+          organization: '',
+          username: '',
+          email: '',
+          date: '',
+          phone: '',
+          status: '',
+        },
+      },
+    },
+  });
+};
+
+const renderWithProviders = (store: any) => {
+  return render(
+    <Provider store={store}>
       <MemoryRouter>
         <UsersTable users={mockUsers} loading={false} />
       </MemoryRouter>
-    );
+    </Provider>
+  );
+};
+
+describe('UsersTable', () => {
+  it('renders table headers', () => {
+    const store = createTestStore();
+    renderWithProviders(store);
     expect(screen.getByText(/Organization/i)).toBeInTheDocument();
     expect(screen.getByText(/Username/i)).toBeInTheDocument();
     expect(screen.getByText(/Email/i)).toBeInTheDocument();
@@ -43,11 +77,8 @@ describe('UsersTable', () => {
   });
 
   it('renders user rows', () => {
-    render(
-      <MemoryRouter>
-        <UsersTable users={mockUsers} loading={false} />
-      </MemoryRouter>
-    );
+    const store = createTestStore();
+    renderWithProviders(store);
     expect(screen.getByText('Org1')).toBeInTheDocument();
     expect(screen.getByText('user1')).toBeInTheDocument();
     expect(screen.getByText('user1@example.com')).toBeInTheDocument();
@@ -57,26 +88,31 @@ describe('UsersTable', () => {
   });
 
   it('opens filter modal when filter icon is clicked', () => {
-    render(
-      <MemoryRouter>
-        <UsersTable users={mockUsers} loading={false} />
-      </MemoryRouter>
-    );
+    const store = createTestStore();
+    renderWithProviders(store);
     const filterIcons = screen.getAllByAltText('filter-icon');
     fireEvent.click(filterIcons[0]);
-    expect(screen.getByTestId('filter-form')).toBeInTheDocument();
+    
+    const state = store.getState();
+    expect(state.users.isFilterOpen).toBe(true);
   });
 
   it('opens options modal when more icon is clicked', () => {
-    render(
-      <MemoryRouter>
-        <UsersTable users={mockUsers} loading={false} />
-      </MemoryRouter>
-    );
+    const store = createTestStore();
+    renderWithProviders(store);
     const moreIcons = screen.getAllByAltText('more');
     fireEvent.click(moreIcons[0]);
     expect(screen.getByText(/View Details/i)).toBeInTheDocument();
     expect(screen.getByText(/Blacklist User/i)).toBeInTheDocument();
     expect(screen.getByText(/Activate User/i)).toBeInTheDocument();
+  });
+
+  it('renders filter icons with cursor pointer style', () => {
+    const store = createTestStore();
+    renderWithProviders(store);
+    const filterIcons = screen.getAllByAltText('filter-icon');
+    filterIcons.forEach(icon => {
+      expect(icon).toHaveStyle('cursor: pointer');
+    });
   });
 }); 

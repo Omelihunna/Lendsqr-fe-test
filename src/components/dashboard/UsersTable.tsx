@@ -2,10 +2,12 @@ import React, { useMemo } from 'react';
 import { useState } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import {getRandomStatus, type User} from "../../constants/constants"
-import FilterModal from "./modals/FilterModal.tsx";
+import { useDispatch } from 'react-redux';
+import { getRandomStatus, type User } from "../../constants/constants"
 import OptionsModal from "./modals/OptionsModal.tsx";
 import styles from "../../styles/components/dashboard/users-table.module.scss"
+import FilterModal from './modals/FilterModal.tsx';
+import { openFilterModal } from '../../store/user/userSlice.ts';
 
 interface Props {
     users: User[];
@@ -15,65 +17,76 @@ interface Props {
 const tableHeaders = ['Organization', 'Username', 'Email', 'Phone number', 'Date joined', 'Status', ''];
 
 const UsersTable: React.FC<Props> = ({ users }) => {
+    const dispatch = useDispatch();
     const [isFilterOpen, setIsFilterOpen] = useState<null | number>(null);
     const [isOptionsOpen, setIsOptionsOpen] = useState<null | string>(null);
-    const validUsers = useMemo(() => users.map(user => ({...user, status: getRandomStatus(), createdAt: moment(user?.createdAt).format('MMM D, YYYY h:mm a')})), [users]);
+    const validUsers = useMemo(() => users.map(user => ({ ...user, status: getRandomStatus(), createdAt: moment(user?.createdAt).format('MMM D, YYYY h:mm a') })), [users]);
+    const handleOpen = (index: number) => {
+        if (isFilterOpen === index) {
+            setIsFilterOpen(null)
+            console.log("close")
+        } else {
+            dispatch(openFilterModal())
+            setIsFilterOpen(index)
+            console.log("open")
+        }
+    }
 
     return (
         <div data-testid="user-table" className={styles["users-table"]}>
             <table>
                 <thead>
-                <tr>
-                    {tableHeaders.map((header, index) => {
+                    <tr>
+                        {tableHeaders.map((header, index) => {
+                            return (
+                                <th key={index}>
+                                    <div>
+                                        <span>{header}</span>
+                                        {header && (
+                                            <img
+                                                src="/images/icons/filter-icon.svg"
+                                                alt="filter-icon"
+                                                onClick={() => handleOpen(index)}
+                                                style={{ cursor: 'pointer' }}
+                                            />
+                                        )}
+                                    </div>
+                                    {isFilterOpen === index ? <FilterModal index={index} /> : ''}
+                                </th>
+                            );
+                        })}
+                    </tr>
+                </thead>
+                <tbody>
+                    {validUsers.map((user: User) => {
                         return (
-                            <th key={index}>
-                                <div>
-                                    <span>{header}</span>
-                                    {header && (
-                                        <img
-                                            src="/images/icons/filter-icon.svg"
-                                            alt="filter-icon"
-                                            onClick={() => (isFilterOpen === index ? setIsFilterOpen(null) : setIsFilterOpen(index))}
-                                        />
-                                    )}
-                                </div>
-                                {isFilterOpen === index ? <FilterModal index={index} /> : ''}
-                            </th>
+                            <tr key={user.id}>
+                                <td>
+                                    <Link to={`/dashboard/users/${user?.id}`}>{user?.organization}</Link>
+                                </td>
+                                <td>{user?.username}</td>
+                                <td>{user?.email}</td>
+                                <td>{user?.phoneNumber}</td>
+                                <td>{user?.createdAt}</td>
+                                <td>
+                                    <span className={styles[`status-${user.status.toLowerCase()}`]}>{user.status}</span>
+                                </td>
+                                <td>
+                                    <img
+                                        src="/images/icons/more-icon.svg"
+                                        alt="more"
+                                        onClick={() => (isOptionsOpen === user?.id ? setIsOptionsOpen(null) : setIsOptionsOpen(user.id))}
+                                    />
+
+                                    {isOptionsOpen === user?.id ? <OptionsModal id={user?.id} /> : ''}
+                                </td>
+                            </tr>
                         );
                     })}
-                </tr>
-                </thead>
-
-                <tbody>
-                {validUsers.map((user: User) => {
-                    return (
-                        <tr key={user.id}>
-                            <td>
-                                <Link to={`/dashboard/users/${user?.id}`}>{user?.organization}</Link>
-                            </td>
-                            <td>{user?.username}</td>
-                            <td>{user?.email}</td>
-                            <td>{user?.phoneNumber}</td>
-                            <td>{user?.createdAt}</td>
-                            <td>
-                                <span className={styles[`status-${user.status.toLowerCase()}`]}>{user.status}</span>
-                            </td>
-                            <td>
-                                <img
-                                    src="/images/icons/more-icon.svg"
-                                    alt="more"
-                                    onClick={() => (isOptionsOpen === user?.id ? setIsOptionsOpen(null) : setIsOptionsOpen(user.id))}
-                                />
-
-                                {isOptionsOpen === user?.id ? <OptionsModal id={user?.id} /> : ''}
-                            </td>
-                        </tr>
-                    );
-                })}
                 </tbody>
             </table>
         </div>
     );
 };
 
-export default UsersTable
+export default UsersTable;
