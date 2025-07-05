@@ -4,7 +4,7 @@ import styles from "../../styles/base/loader.module.scss"
 
 const Loader: React.FC = () => {
     return (
-        <div className={styles["loader"]}>
+        <div data-testid="loader" className={styles["loader"]}>
             <ClipLoader/>
         </div>
     )

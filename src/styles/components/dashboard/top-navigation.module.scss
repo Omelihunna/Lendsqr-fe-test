@@ -61,7 +61,8 @@
     .left {
         display: flex;
         flex-direction: row;
-        gap: 170px;
+        width: 52%;
+        justify-content: space-between;
     }
 
     .logo {

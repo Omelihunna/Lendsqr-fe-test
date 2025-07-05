@@ -1,13 +1,13 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {config} from "../../config/config.ts";
+import {config} from "../../config/config";
 import type {User} from "../../constants/constants.ts";
-import {cacheUser, getCachedUser} from "../../utils/helpers.ts";
+import {cacheUser, getCachedUser} from "../../utils/helpers";
 
 export const userApi = createApi({
     reducerPath: "userApi",
     baseQuery: fetchBaseQuery({
         baseUrl: config.baseApiUrl,
-        prepareHeaders: (headers, {}) => {
+        prepareHeaders: (headers) => {
             headers.set("Authorization", `Bearer ${config.accessToken}`);
             return headers;
         },
@@ -20,7 +20,7 @@ export const userApi = createApi({
         }),
         getUserById: builder.query<User, string>({
             query: () => ``,
-            transformResponse: (response: User[], meta, id) => {
+            transformResponse: (response: User[], _, id) => {
                 const user = response.find(u => u.id === id);
                 if (!user) throw new Error("User not found");
                 cacheUser(id, user);

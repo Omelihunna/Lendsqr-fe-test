@@ -35,7 +35,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ index = 0 }) => {
         resetForm();
     };
 
-    const formClassName = index === 0 
+    const formClassName = index === 0
         ? `${styles["filter-form"]} ${styles["left-align"]}`
         : styles["filter-form"];
 
@@ -45,7 +45,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ index = 0 }) => {
             onSubmit={onSubmit}
         >
             {({ resetForm }) => (
-                <Form className={formClassName}>
+                <Form className={formClassName}  data-testid="filter-form">
                     <div className={styles["form-group"]}>
                         <label htmlFor="organization">Organization</label>
                         <Field

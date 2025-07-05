@@ -22,8 +22,9 @@ const LoginForm: React.FC = () => {
 
     const handleSubmit = async (values: LoginValues) => {
         setLoading(true);
+        console.log("Logging in with:", values);
         await new Promise(resolve => setTimeout(resolve, 3000));
-        console.log("Login successful", values);
+        console.log("Logging in with:", values);
         nav("/dashboard/users");
         setLoading(false);
     };

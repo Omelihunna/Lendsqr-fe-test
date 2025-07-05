@@ -1,13 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { userApi } from "./userApi"; // adjust import path as needed
-
-interface User {
-    id: string;
-    name: string;
-    email: string;
-    // extend as needed
-}
+import { userApi } from "./userApi";
+import type {User} from "../../constants/constants.ts"; // adjust import path as needed
 
 interface UserState {
     selectedUserId: string | null;
